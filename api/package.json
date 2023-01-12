@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/ollitoivanen/birdnest/issues"
   },
-  "homepage": "https://github.com/ollitoivanen/birdnest#readme"
+  "homepage": "https://github.com/ollitoivanen/birdnest#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  }
 }

@@ -160,7 +160,6 @@ const MOCK_DRONE_DATA = [
     altitude: 4937.680812555731,
   },
 ];
-
 const MOCK_VIOLATOR_DATA = [
   {
     serialNumber: "SN-gT7-jbKyLt",
@@ -176,6 +175,14 @@ const MOCK_VIOLATOR_DATA = [
     distance: 86250,
   },
 ];
+const MOCK_PILOT_DATA = {
+  pilotId: "P-bfYxZ7Ygaq",
+  firstName: "Demond",
+  lastName: "Kerluke",
+  phoneNumber: "+210608670101",
+  createdDt: "2022-06-08T07:06:38.931Z",
+  email: "demond.kerluke@example.com",
+};
 
 describe("Test getting drones from Reaktor", () => {
   it("Turn the xml into array.", async () => {
@@ -191,3 +198,5 @@ describe("Test calculating violating drones", () => {
     expect(actualResult === MOCK_VIOLATOR_DATA);
   });
 });
+
+//No tests for getViolatingPilots as it is dependant on Reaktor API.

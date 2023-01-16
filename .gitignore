@@ -1,3 +1,29 @@
-node_modules
+#API
+/api/node_modules
+/api/config.js
+
+#Client
+
+# dependencies
+/client/node_modules
+/client/.pnp
+/client/.pnp.js
+
+# testing
+/client/coverage
+
+# production
+/client/build
+
+# misc
+/client/.env.local
+/client/.env.development.local
+/client/.env.test.local
+/client/.env.production.local
+
+/client/npm-debug.log*
+/client/yarn-debug.log*
+/client/yarn-error.log*
+
+#Shared .gitignore
 .DS_Store
-config.js

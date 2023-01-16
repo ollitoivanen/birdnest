@@ -5,12 +5,22 @@ const {
 } = require("../helpers/calculateViolatingDrones");
 const { getDronesFromReaktor } = require("../helpers/getDronesFromReaktor");
 const { getViolatingPilots } = require("../helpers/getViolatingPilots");
+const getViolatorsFromDB = require("../helpers/getViolatorsFromDB");
 
 async function getViolatorData() {
   setInterval(async () => {
     const drones = await getDronesFromReaktor();
     const violatingDrones = calculateViolatingDrones(drones);
     const violatingPilots = await getViolatingPilots(violatingDrones);
+
+    const violatorsFromDB = getViolatorsFromDB();
+    //TODO compare to DB
+
+    const updatedViolators = updateViolators(violatorsFromDB, violatingPilots);
+
+    //TODO update DB
+
+    //TODO update global var
   }, 2000);
 }
 

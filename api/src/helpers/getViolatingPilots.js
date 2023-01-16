@@ -1,4 +1,5 @@
-const { REAKTOR_PILOTS_URL } = require("../utils/constants");
+const Violator = require("../models/violator");
+const { REAKTOR_PILOTS_URL, FETCH_OPTIONS_GET } = require("../utils/constants");
 const fetchData = require("../utils/fetchData");
 
 async function getViolatingPilots(violatingDrones) {
@@ -6,7 +7,13 @@ async function getViolatingPilots(violatingDrones) {
     violatingDrones.map(async (drone) => {
       const { serialNumber, distance } = drone;
       const pilotData = await fetchPilotDataFromReaktor(serialNumber);
-      const fullPilotData = { ...pilotData, distance, serialNumber };
+      //Adding needed fields to pilot data
+      const fullPilotData = {
+        ...pilotData,
+        droneSerialNumber: serialNumber,
+        closestDistance: distance,
+        latestViolation: Date.now(),
+      };
       return fullPilotData;
     })
   );

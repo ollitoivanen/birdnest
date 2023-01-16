@@ -1,4 +1,4 @@
 //Startup script for
 const app = require("../app");
 //Todo only for development
-app.listen(3000);
+app.listen(8000);

@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useEffect, useState } from "react";
 
 function App() {
+  let [apiResponse, setApiResponse] = useState("");
+
+  useEffect(() => {
+    console.log("Getting data from server");
+    const eventSource = new EventSource("http://localhost:8000/violators");
+    eventSource.onmessage = (e) => {
+      console.log("new update from server");
+      setApiResponse(e.data);
+    };
+    return () => {
+      console.log("closing");
+      eventSource.close();
+    };
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>{apiResponse}</p>
     </div>
   );
 }

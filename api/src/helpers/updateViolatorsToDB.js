@@ -1,8 +1,7 @@
 const Violator = require("../models/violator");
 
-//Updates or creates violator to DB, returns an array of up to date violators to be sent to client.
+//Updates or creates violator to DB, returns an array of up-to date violators to be sent to client.
 async function updateViolatorsToDB(pastViolators, currentViolators) {
-  console.log("past " + pastViolators);
   let upToDateViolators = [];
   pastViolators.forEach(async (pastViolator) => {
     //Check if past violator is currently violating.

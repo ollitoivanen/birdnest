@@ -21,8 +21,6 @@ function checkStatusCode(response) {
   //Todo write responses to all status codes
 }
 
-function handleNetworkError(networkError) {
-  console.log(networkError);
-}
+function handleNetworkError(networkError) {}
 
 module.exports = fetchData;

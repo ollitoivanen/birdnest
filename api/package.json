@@ -19,7 +19,8 @@
   "homepage": "https://github.com/ollitoivanen/birdnest#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "fast-xml-parser": "^4.0.13"
+    "fast-xml-parser": "^4.0.13",
+    "mongoose": "^6.8.3"
   },
   "devDependencies": {
     "chai": "^4.3.7",

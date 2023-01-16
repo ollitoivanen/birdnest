@@ -10,7 +10,7 @@ const ViolatorSchema = new Schema({
   email: { type: String, required: true },
   droneSerialNumber: { type: String, required: true },
   closestDistance: { type: Number, required: true },
-  latestsViolation: { type: Date, required: true },
+  latestViolation: { type: Date, required: true },
 });
 
 module.exports = mongoose.model("Violator", ViolatorSchema);

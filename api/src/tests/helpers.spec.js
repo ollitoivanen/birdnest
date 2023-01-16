@@ -194,7 +194,6 @@ describe("Test getting drones from Reaktor", () => {
 describe("Test calculating violating drones", () => {
   it("Returns array with only pilots closer than 100m", async () => {
     const actualResult = calculateViolatingDrones(MOCK_DRONE_DATA);
-    console.log(actualResult);
     expect(actualResult === MOCK_VIOLATOR_DATA);
   });
 });

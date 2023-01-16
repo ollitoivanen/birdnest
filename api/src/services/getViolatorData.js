@@ -6,6 +6,8 @@ const {
 const { getDronesFromReaktor } = require("../helpers/getDronesFromReaktor");
 const { getViolatingPilots } = require("../helpers/getViolatingPilots");
 const getViolatorsFromDB = require("../helpers/getViolatorsFromDB");
+const updateViolatorsToDB = require("../helpers/updateViolatorsToDB");
+const updateViolators = require("../helpers/updateViolatorsToDB");
 
 async function getViolatorData() {
   setInterval(async () => {
@@ -13,10 +15,13 @@ async function getViolatorData() {
     const violatingDrones = calculateViolatingDrones(drones);
     const violatingPilots = await getViolatingPilots(violatingDrones);
 
-    const violatorsFromDB = getViolatorsFromDB();
-    //TODO compare to DB
+    const violatorsFromDB = await getViolatorsFromDB();
+    const updatedViolators = updateViolatorsToDB(
+      violatorsFromDB,
+      violatingPilots
+    );
 
-    const updatedViolators = updateViolators(violatorsFromDB, violatingPilots);
+    console.log(updatedViolators);
 
     //TODO update DB
 

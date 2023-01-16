@@ -13,14 +13,12 @@ async function getViolatorData() {
     const drones = await getDronesFromReaktor();
     const violatingDrones = calculateViolatingDrones(drones);
     const violatingPilots = await getViolatingPilots(violatingDrones);
-
     const violatorsFromDB = await getViolatorsFromDB();
     const updatedViolators = await updateViolatorsToDB(
       violatorsFromDB,
       violatingPilots
     );
     global.violatorData = updatedViolators;
-    console.log(updatedViolators);
 
     //TODO update DB
 

@@ -2,16 +2,18 @@ const { RADAR_ORIGIN } = require("../utils/constants");
 
 function calculateViolatingDrones(drones) {
   let violatingDrones = [];
-  drones.forEach((drone) => {
+  let nonViolatingDrones = drones;
+  drones.forEach((drone, index) => {
     const { positionX, positionY } = drone;
     const distance = calculateDistanceFromOrigin(positionX, positionY);
     if (distance < 100000) {
       drone.distance = distance;
       violatingDrones.push(drone);
+      nonViolatingDrones.splice(index, 1);
     }
   });
 
-  return violatingDrones;
+  return [violatingDrones, nonViolatingDrones];
 }
 
 function calculateDistanceFromOrigin(positionX, positionY) {

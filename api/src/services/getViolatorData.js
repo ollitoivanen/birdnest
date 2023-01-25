@@ -4,26 +4,33 @@ const {
   calculateViolatingDrones,
 } = require("../helpers/calculateViolatingDrones");
 const { getDronesFromReaktor } = require("../helpers/getDronesFromReaktor");
-const { getViolatingPilots } = require("../helpers/getViolatingPilots");
 const getViolatorsFromDB = require("../helpers/getViolatorsFromDB");
 const updateViolatorsToDB = require("../helpers/updateViolatorsToDB");
+
+const Violator = require("../models/violator");
 
 async function getViolatorData() {
   setInterval(async () => {
     const drones = await getDronesFromReaktor();
-    const violatingDrones = calculateViolatingDrones(drones);
-    const violatingPilots = await getViolatingPilots(violatingDrones);
+    const [currentViolatingDrones, currentNonViolatingDrones] =
+      calculateViolatingDrones(drones);
+
     const violatorsFromDB = await getViolatorsFromDB();
-    const updatedViolators = await updateViolatorsToDB(
+
+    const upToDateViolators = await updateViolatorsToDB(
       violatorsFromDB,
-      violatingPilots
+      currentViolatingDrones,
+      currentNonViolatingDrones
     );
-    global.violatorData = updatedViolators;
-
-    //TODO update DB
-
-    //TODO update global var
+    global.violatorData = upToDateViolators;
   }, 2000);
 }
 
+function expired(pastViolator) {
+  const expiry10Minutes = 10 * 60 * 1000;
+  const { latestViolation } = pastViolator;
+  const timeElapsed = Date.now() - latestViolation;
+
+  return timeElapsed > expiry10Minutes;
+}
 module.exports = getViolatorData;

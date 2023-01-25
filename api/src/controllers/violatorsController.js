@@ -7,7 +7,7 @@ exports.start_updating_connection = (req, res) => {
   });
   setInterval(() => {
     res.write(
-      "data: message" + JSON.stringify(global.violatorData) + "\n\n",
+      "data: " + JSON.stringify(global.violatorData) + "\n\n",
       () => {}
     );
   }, 1000);

@@ -5,7 +5,10 @@ const fetchData = require("../utils/fetchData");
 
 async function getDronesFromReaktor() {
   const response = await fetchData(REAKTOR_DRONES_URL, FETCH_OPTIONS_GET);
-  const body = await response.text();
+  //If there's an error with fetching, return empty array.
+  const body = await response?.text();
+  if (body === undefined) return [];
+
   const arrayData = await xmlToArray(body);
   return arrayData;
 }
